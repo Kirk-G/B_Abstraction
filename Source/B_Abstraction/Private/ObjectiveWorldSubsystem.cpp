@@ -20,7 +20,41 @@ void UObjectiveWorldSubsystem::DisplayObjectiveWidget()
 	ObjectiveWidget->AddToViewport();
 }
 
-void UObjectiveWorldSubsystem::OnObjectiveCompleted()
+FString UObjectiveWorldSubsystem::GetCurrentObjectiveDescription()
+{
+	if(!Objectives.IsValidIndex(0)|| Objectives[0]->GetState() == EObjectiveState::OS_Inactive )
+	{
+		return TEXT("N/A");
+	}
+
+	FString RetObjective = Objectives[0]->GetDescription();
+	if(Objectives[0]->GetState() == EObjectiveState::OS_Completed)
+	{
+		RetObjective += TEXT("Completed!");
+	}
+
+	return RetObjective;
+}
+
+void UObjectiveWorldSubsystem::AddObjective(UObjectiveComponent* ObjectiveComponent)
+{
+	check(ObjectiveComponent);
+
+	size_t PrevSize = Objectives.Num();
+	Objectives.AddUnique(ObjectiveComponent);
+	if(Objectives.Num() > PrevSize)
+	{
+		ObjectiveComponent->OnStateChanged().AddUObject(this, &UObjectiveWorldSubsystem::OnObjectiveStateChanged);
+	}
+}
+
+void UObjectiveWorldSubsystem::RemoveObjective(UObjectiveComponent* ObjectiveComponent)
+{
+	Objectives.Remove(ObjectiveComponent);
+}
+
+void UObjectiveWorldSubsystem::OnObjectiveStateChanged(UObjectiveComponent* ObjectiveComponent, EObjectiveState ObjectiveState)
 {
 	DisplayObjectiveWidget();
 }
+
