@@ -34,14 +34,13 @@ void AAbstractionPlayerCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 
 }
 
-/*
+
 // Called when the actor falls out of the world (below KILLZ)
 void AAbstractionPlayerCharacter::FellOutOfWorld(const UDamageType& dmgType)
 {
 	APlayerController* PlayerController = GetController<APlayerController>();
 	if(PlayerController)
 	{
-		PlayerContoller->RestartLevel();
+		PlayerController->RestartLevel();
 	}
 }
-*/

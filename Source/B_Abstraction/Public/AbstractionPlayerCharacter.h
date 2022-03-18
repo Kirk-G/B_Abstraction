@@ -29,6 +29,6 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	// Called when the actor falls out of the world (below KILLZ)
-	//virtual void FellOutOfWorld(const class UDamageType& dmgType) override;
+	virtual void FellOutOfWorld(const class UDamageType& dmgType) override;
 
 };
