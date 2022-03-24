@@ -5,7 +5,7 @@
 #include "Components/CapsuleComponent.h"
 #include "AbstractionPlayerCharacter.h"
 #include "GameFramework/DamageType.h"
-#include "Particles/ParticleSystemComponent.h"
+
 
 
 // Sets default values for this component's properties
